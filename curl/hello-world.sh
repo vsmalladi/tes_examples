@@ -45,7 +45,7 @@ TASK_PAYLOAD=$(jq -n --arg output_url "$OUTPUT_URL" '
       "command": [
         "sh",
         "-c",
-        "mkdir -p /data && echo \"Hello World from TES\" > /data/output.txt"
+        "mkdir -p /data && echo \"Hello World from TES, curl\" > /data/output.txt"
       ]
     }
   ],
