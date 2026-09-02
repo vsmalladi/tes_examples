@@ -11,7 +11,7 @@ This folder contains a minimal TES task submission example using curl.
 ## What hello-world.sh does
 
 1. Loads environment variables from .env if present.
-2. Validates TES_SERVER_USER and TES_SERVER_PASSWORD.
+2. Validates TES_SERVER_USER, TES_SERVER_PASSWORD, and TES_OUTPUT_STORAGE_PATH.
 3. Reads TES_BASE from the first line of .tes_instances.
 4. Builds a TES task payload using jq.
 5. Submits the task to POST /v1/tasks.
@@ -32,6 +32,7 @@ Create .env in this folder:
 
 TES_SERVER_USER=<username>
 TES_SERVER_PASSWORD=<password>
+TES_OUTPUT_STORAGE_PATH=<url path prefix, e.g. file:///path/to/output/dir>
 
 Create .tes_instances in this folder (first line is used):
 
@@ -53,6 +54,8 @@ chmod +x hello-world.sh
 
 - TES_SERVER_USER / TES_SERVER_PASSWORD not set:
   Add both variables to .env.
+- TES_OUTPUT_STORAGE_PATH not set:
+  Add TES_OUTPUT_STORAGE_PATH to .env (e.g. file:///path/to/output/dir).
 - No TES instance found in .tes_instances:
   Ensure first line exists and includes description,url.
 - Failed to submit task:

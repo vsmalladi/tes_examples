@@ -14,6 +14,11 @@ if [ -z "${TES_SERVER_USER:-}" ] || [ -z "${TES_SERVER_PASSWORD:-}" ]; then
   exit 1
 fi
 
+if [ -z "${TES_OUTPUT_STORAGE_PATH:-}" ]; then
+  echo "❌ TES_OUTPUT_STORAGE_PATH not set in .env"
+  exit 1
+fi
+
 ########################################
 # Read TES base URL
 ########################################
@@ -30,7 +35,9 @@ echo "✅ Using TES instance: $TES_BASE"
 ########################################
 # Hello World TES payload
 ########################################
-TASK_PAYLOAD=$(jq -n '
+OUTPUT_URL="${TES_OUTPUT_STORAGE_PATH%/}/output.txt"
+
+TASK_PAYLOAD=$(jq -n --arg output_url "$OUTPUT_URL" '
 {
   "executors": [
     {
@@ -49,7 +56,7 @@ TASK_PAYLOAD=$(jq -n '
     {
       "name": "output.txt",
       "path": "/data/output.txt",
-      "url": "file:///Users/venkat.malladi/funnel-demo/data/out/output.txt",
+      "url": $output_url,
       "type": "FILE"
 
     }
