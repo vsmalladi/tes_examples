@@ -29,58 +29,33 @@ echo "✅ Using TES instance: $TES_BASE"
 
 ########################################
 # Hello World TES payload
-# Default mode avoids PVC/S3 CSI dependency in local kind setups.
 ########################################
-USE_FILE_OUTPUTS=${TES_USE_FILE_OUTPUTS:-true}
-
-if [[ "$USE_FILE_OUTPUTS" == "true" ]]; then
-  TASK_PAYLOAD=$(jq -n '
-  {
-    "executors": [
-      {
-        "image": "alpine:3.22.4",
-        "command": [
-          "sh",
-          "-c",
-          "mkdir -p /data && echo \"Hello World from TES\" > /data/output.txt"
-        ]
-      }
-    ],
-    "resources": {
-      "ram_gb": 1.0
-    },
-    "outputs": [
-      {
-        "name": "output.txt",
-        "path": "/data/output.txt",
-        "url": "file:///transfer/output.txt",
-        "type": "FILE"
-
-      }
-    ]
-  }'
-  )
-  echo "ℹ️ TES_USE_FILE_OUTPUTS=true: using file:// output mode"
-else
-  TASK_PAYLOAD=$(jq -n '
-  {
-    "executors": [
-      {
-        "image": "alpine:3.22.4",
-        "command": [
-          "sh",
-          "-c",
-          "echo \"Hello World from TES\""
-        ]
-      }
-    ],
-    "resources": {
-      "ram_gb": 1.0
+TASK_PAYLOAD=$(jq -n '
+{
+  "executors": [
+    {
+      "image": "alpine:3.22.4",
+      "command": [
+        "sh",
+        "-c",
+        "mkdir -p /data && echo \"Hello World from TES\" > /data/output.txt"
+      ]
     }
-  }'
-  )
-  echo "ℹ️ TES_USE_FILE_OUTPUTS=false: using stdout-only mode"
-fi
+  ],
+  "resources": {
+    "ram_gb": 1.0
+  },
+  "outputs": [
+    {
+      "name": "output.txt",
+      "path": "/data/output.txt",
+      "url": "file:///Users/venkat.malladi/funnel-demo/data/out/output.txt",
+      "type": "FILE"
+
+    }
+  ]
+}'
+)
 
 ########################################
 # Submit task

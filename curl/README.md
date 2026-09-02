@@ -37,18 +37,6 @@ Create .tes_instances in this folder (first line is used):
 
 Funnel,http://localhost:8000/ga4gh/tes
 
-## Optional configuration
-
-TES_USE_FILE_OUTPUTS controls payload mode:
-
-- true (default): Writes output file in container and publishes file:///transfer/output.txt as TES output.
-- false: Sends a stdout-only task with no outputs section.
-
-Examples:
-
-TES_USE_FILE_OUTPUTS=true ./hello-world.sh
-TES_USE_FILE_OUTPUTS=false ./hello-world.sh
-
 ## Run
 
 chmod +x hello-world.sh
