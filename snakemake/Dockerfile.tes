@@ -1,0 +1,6 @@
+FROM snakemake/snakemake:v9.21.1
+# snakemake-storage-plugin-fs shells out to the system `rsync` binary to
+# copy files in/out of storage. The upstream snakemake/snakemake image does
+# not ship rsync, so we add it here via micromamba.
+RUN micromamba install -y -n snakemake -c conda-forge rsync \
+    && micromamba clean --all --yes

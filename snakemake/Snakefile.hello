@@ -1,0 +1,13 @@
+rule all:
+    input:
+        "output.txt"
+
+rule hello_world:
+    output:
+        "output.txt"
+    container:
+        "docker://alpine:3.22.4"
+    shell:
+        r"""
+        echo "Hello World from TES, Snakemake" > {output}
+        """

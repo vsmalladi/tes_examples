@@ -1,0 +1,7 @@
+# uv override: force py-tes above the version snakemake-executor-plugin-tes
+# 0.1.3 requires (py-tes>=0.4.2,<0.5.0). py-tes 0.4.2 crashes when a TES task
+# response has a null "resources" field (TypeError: j must be a str or dict),
+# which Funnel returns for view=MINIMAL task queries. py-tes>=1.1.4 fixes
+# this. Apply with:
+#   uv pip install --python .venv/bin/python3 -r requirements.txt --override overrides.txt
+py-tes==1.1.4
