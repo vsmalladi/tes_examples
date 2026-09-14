@@ -1,0 +1,22 @@
+[run.backends.default]
+type = "tes"
+# The URL of the TES API server
+url = "http://localhost:8000/"
+# The cloud storage URL where Sprocket will upload inputs.
+# Configure auth separately if required.
+inputs = "https://<your-storage-account>.blob.core.windows.net/inputs/"
+# The cloud storage URL where the TES API server will upload outputs.
+# Configure auth separately if required.
+outputs = "https://<your-storage-account>.blob.core.windows.net/<your-output-container-or-prefix>/"
+# The polling interval for task status updates (defaults to 60 seconds)
+interval = 60
+# The number of retries after encountering an error communicating with the TES server (defaults to 0 retries)
+retries = 0
+# If insecure url of TES
+insecure = true
+
+# If basic authentication is required:
+[run.backends.default.auth]
+type = "basic"
+username = "<your-tes-username>"
+password = "<your-tes-password>"
